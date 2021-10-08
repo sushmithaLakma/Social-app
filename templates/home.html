@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">Hello!</h1>
+  <p class="lead">A place to get to know more about your acquaintances.</p>
+  <p class="lead">
+  	<a class="btn btn-primary btn-lg" href="{% url 'login' %}"
+  	role="button">Sign up</a> | <a class="btn btn-primary btn-lg" href="{% url 'login' %}"
+    role="button">Log In</a>
+  </p>	
+</div>
+{% endblock content %}

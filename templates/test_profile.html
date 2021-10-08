@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+{% block scripts %}
+<!-- <script src="{% static 'profiles/my_profile.js' %}" defer></script> -->
+{% endblock scripts %}
+
+<title>
+	{% block title %}
+		Posts
+	{% endblock title %}
+</title>
+
+<body>
+{% block content %}
+<!-- badge 
+<button type="button" class="btn btn-primary position-relative">
+  Profile
+  <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+  <span class="visually-hidden"></span> 
+  </span> 
+</button>
+<br/><br/>  -->
+
+<!-- profile intro -->
+<div>
+
+</div>
+
+<!-- modal -->
+<div class="modal" id='to-follow-modal' tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">People you may know</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+        <!-- card style to explore users -->
+		<div class="card text-center" style="width: 18rem;">
+  		<div class="card-body">
+    		<h5 class="card-title" id='user-name'></h5>
+    		<p class="card-text" id='to-follow-modal'>	
+    		</p>
+    		<a href="#" class="btn btn-primary">Connect</a>
+  		</div>
+		</div>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- container -->
+<div class="container">
+  <div class="row justify-content-md-center"> 
+    <div class="col col-lg-3">
+    <!-- nav --> 
+    <ul class="nav flex-column nav-pills">
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">Home</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">My profile</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">Add post</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="/profiles/friends">Friends</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="/profiles/my">Explore people</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">Log out</a>
+  	</li>
+	</ul>
+    </div>
+    <div class="col-md-auto">
+<!-- card body for posts -->
+<p><b>My posts</b> : 
+	{% for post in profile.get_my_posts %}
+		<div class="card mb-3" style="width: 40rem;">
+  		  <img src="{{ post.picture.url }}" height=400px width=700px class="card-img-top" alt="...">
+  			<div class="card-body">
+    			<h5 class="card-title">{{ post.author }}</h5>
+    			<p class="card-text">{{ post.body }}</p>
+    			<p class="card-text"><small class="text-muted">{{ post.created }}</small></p>
+  			</div>
+		</div>
+	{% endfor %} 
+	</p>
+<p><b>My posts number</b> : {{ profile.num_posts }} </p>
+<p><b>Following profiles</b> : {{ profile.get_following }} </p>
+<p><b>Connected users</b> :
+	{% for profile in profile.get_following_users %} 
+		<ul> {{ profile }} </ul>
+	{% endfor %}
+</p>
+<p><b>My feed</b> 
+	{% for post in profile.get_my_and_following_posts %}
+		<div class="card mb-3" style="width: 40rem;">
+		{% if post.picture %}	
+  		  <img src="{{ post.picture.url }}" height=400px width=700px class="card-img-top" alt="...">
+  		{% endif %}  
+  			<div class="card-body">
+    			<h5 class="card-title">{{ post.author }}</h5>
+    			<p class="card-text">{{ post.body }}</p>
+    			<p class="card-text"><small class="text-muted">{{ post.created }}</small></p>
+  			</div>
+		</div>
+	{% endfor %} 
+</p>
+<p><b>Explore other profiles</b> 
+{% for profile in profile.get_proposals_for_following %}
+	<ul> {{ profile }} </ul>
+{% endfor %}
+</p>
+<p><b>Number of people that I follow</b> : {{ profile.following_count }} </p>
+<p><b>My followers</b> : {{ profile.get_followers }} </p>
+<p><b>Number of my followers</b> : {{ profile.followers_count }} </p>
+  </div>
+ </div>  
+</div>
+{% endblock content %}
+
+</body>
+</html>

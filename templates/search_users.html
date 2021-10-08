@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+
+<head>
+    <title>AutoComplete</title>
+
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link> 
+     <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
+ <!--    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
+  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>  
+  	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  
+  	<link rel="stylesheet" href="/resources/demos/style.css">  -->
+
+<!--	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>   -->
+
+</head>
+
+{% block scripts %}
+<!--	<script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>  -->
+{% endblock scripts %}
+
+<body>
+{% block content %}
+<!--
+<div class="container mt-5 pt-5 col-md-5">
+	<h4>Find friends</h4>
+	<div id="autocomplete" class="autocomplete">
+  		<input class="autocomplete-input" />
+  		<ul class="autocomplete-result-list"></ul>
+	</div>
+</div>
+-->
+<input type="text" id="tags">
+ <script>
+  $( function() {
+    var availableTags = [
+        {% for username in usernames %}
+            {{ username.user }},
+        {% endfor %}
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+{% endblock content %}
+</body>
+</html>
+
+

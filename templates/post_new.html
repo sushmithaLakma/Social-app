@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+{% block title %}Posts{% endblock title %}
+
+{% block scripts %}
+<script src="{% static 'post_new.js' %}" defer></script>
+{% endblock scripts %}
+
+<body>
+{% block content %}
+    <div class="card">
+      <div class="card-header">
+        <span class="text-muted">by {{ post.author }} </span>	
+      </div>
+      <div class="card-body" id='post-body'>
+      	<p>{{ post.body }}</p>
+      </div>
+    </div>
+    <br />
+{% endblock content %}  
+</body> 
+</html> 

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+
+<body>
+{% block content %}
+<!-- navs friends list -->
+<div class="container">
+<!--  <div class="row justify-content-md-center">  -->
+    <div class="col col-lg-3" style="float: left;">
+    	<!-- nav --> 
+    <ul class="nav flex-column nav-pills">
+  	<li class="nav-item">
+    	<a class="nav-link active" href="#">Home</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">My profile</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">Add post</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">Friends</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">Explore people</a>
+  	</li>
+  	<li class="nav-item">
+    	<a class="nav-link" href="#">Log out</a>
+  	</li>
+	</ul>
+    </div>
+
+    <div class="col-md-auto">	
+    <!-- card friends list -->
+	<div class="card">
+  	<h5 class="card-header">Friends</h5>
+  	<div class="card-body">
+    	<p class="card-text">
+		<!-- tabs -->
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+  		<li class="nav-item" role="presentation">
+    		<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Following {{ profile.following_count }}</a>
+  		</li>
+  		<li class="nav-item" role="presentation">
+    		<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Followers {{ profile.followers_count }}</a>
+  		</li>
+ 		</ul>
+ 		<div class="tab-content" id="myTabContent">
+  		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+  		<p>
+  		   {% for profile in profile.get_following_users %} 
+			<ul> {{ profile }} </ul>
+		   {% endfor %}
+		</p>
+  		</div>
+  		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  		<p>
+  		   {% for profile in profile.get_followers %} 
+			<ul> {{ profile }} </ul>
+		   {% endfor %}
+		</p>	
+  		</div>
+		</div>
+ 		</p>
+    	<!--	<a href="#" class="btn btn-secondary">Close</a>  -->
+  		</div>
+	   </div>	
+	</div>
+  <!-- </div> -->
+</div>
+{% endblock content %}
+</body>
+</html>
